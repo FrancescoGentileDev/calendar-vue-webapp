@@ -1,13 +1,12 @@
-export class Client {}
+export class Client { }
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  PrimaryColumn,
   ManyToOne,
 } from 'typeorm'
 
-import {Users} from 'src/users/entities/user.entity'
+import { Users } from 'src/users/entities/user.entity'
 @Entity()
 export class Clients {
   @PrimaryGeneratedColumn()
@@ -19,13 +18,13 @@ export class Clients {
   @Column()
   lastname: string
 
-  @Column()
-  cellphone: number
+  @Column({nullable: true})
+  cellphone: string
 
-  @Column()
+  @Column({nullable: true})
   note: string
 
-  @Column()
+  @Column({default: true})
   isNew: boolean
 
   @ManyToOne(type => Users, users => users.clients)
