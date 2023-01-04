@@ -12,6 +12,7 @@ import {getEnvPath} from './common/helper/env.helper'
 import {env} from './common/envs/db.connection'
 import { ServicesModule } from './services/services.module';
 import { Services } from 'src/services/entities/service.entity';
+import { AppointmentsModule } from './appointments/appointments.module';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`)
 
@@ -38,6 +39,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`)
     ClientsModule,
     AuthModule,
     ServicesModule,
+    AppointmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
