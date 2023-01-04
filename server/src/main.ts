@@ -1,14 +1,25 @@
-import {ValidationPipe} from '@nestjs/common'
-import {NestFactory} from '@nestjs/core'
-import {AppModule} from './app.module'
+import { ValidationPipe } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from './app.module'
 import * as session from 'express-session'
 import * as passport from 'passport'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import {getEnvPath} from './common/helper/env.helper'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import { getEnvPath } from './common/helper/env.helper'
+var MySQLStore = require('express-mysql-session')(session);
+
 require('dotenv').config()
 
 async function bootstrap() {
+
+  var options = {
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'root',
+    database: 'test'
+  };
+
+  var sessionStore = new MySQLStore(options);
+
   const app = await NestFactory.create(AppModule)
   app.setGlobalPrefix('api')
   app.useGlobalPipes(new ValidationPipe())
@@ -16,6 +27,7 @@ async function bootstrap() {
     session({
       secret: process.env.SESSION_SECRET,
       resave: false,
+      store: sessionStore,
       saveUninitialized: false,
     }),
   )
