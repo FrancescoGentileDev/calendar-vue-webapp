@@ -17,6 +17,9 @@ export class Users {
   @Column()
   password: string
 
+  @Column({ default: false })
+  is_admin: boolean
+
   @OneToMany(type => Clients, clients => clients.user)
   clients: Clients[]
 }
