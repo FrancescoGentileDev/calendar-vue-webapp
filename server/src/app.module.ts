@@ -11,12 +11,13 @@ import {ConfigModule, ConfigService} from '@nestjs/config'
 import {getEnvPath} from './common/helper/env.helper'
 import {env} from './common/envs/db.connection'
 import { ServicesModule } from './services/services.module';
+import { Services } from 'src/services/entities/service.entity';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`)
 
 @Module({
   imports: [
-    UsersModule,
+  UsersModule,
     ConfigModule.forRoot({
       envFilePath,
       isGlobal: true,
@@ -29,7 +30,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`)
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASS'),
         database: configService.get<string>('DB_NAME'),
-        entities: [Users, Clients],
+        entities: [Users, Clients, Services],
         synchronize: true,
       }),
       inject: [ConfigService],
