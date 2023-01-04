@@ -13,12 +13,12 @@ import {env} from './common/envs/db.connection'
 import { ServicesModule } from './services/services.module';
 import { Services } from 'src/services/entities/service.entity';
 import { AppointmentsModule } from './appointments/appointments.module';
-
+import { Appointments } from 'src/appointments/entities/appointment.entity';
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`)
 
 @Module({
   imports: [
-  UsersModule,
+UsersModule,
     ConfigModule.forRoot({
       envFilePath,
       isGlobal: true,
@@ -31,7 +31,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`)
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASS'),
         database: configService.get<string>('DB_NAME'),
-        entities: [Users, Clients, Services],
+        entities: [Users, Clients, Services, Appointments],
         synchronize: true,
       }),
       inject: [ConfigService],
@@ -40,6 +40,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`)
     AuthModule,
     ServicesModule,
     AppointmentsModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],

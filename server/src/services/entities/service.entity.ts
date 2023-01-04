@@ -4,9 +4,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm'
 
 import { Users } from 'src/users/entities/user.entity'
+import { Appointments } from 'src/appointments/entities/appointment.entity';
 @Entity()
 export class Services { 
   @PrimaryGeneratedColumn()
@@ -15,7 +17,7 @@ export class Services {
   @Column()
   name: string
 
-  @Column({nullable: true, type:'decimal', precision: 10, scale: 2, default: 0})
+  @Column({nullable: true, type:'decimal', default: 0, precision: 10, scale: 2})
   price: number
 
   @Column({nullable: true})
@@ -30,4 +32,7 @@ export class Services {
 
   @ManyToOne(type => Users, users => users.services)
   user: Users
+
+  @OneToMany(type => Appointments, appointments => appointments.service)
+  appointments: Appointments[]
  }

@@ -4,9 +4,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
+  OneToMany,
 } from 'typeorm'
 
 import { Users } from 'src/users/entities/user.entity'
+import { Appointments } from 'src/appointments/entities/appointment.entity'
 @Entity()
 export class Clients {
   @PrimaryGeneratedColumn()
@@ -29,4 +31,7 @@ export class Clients {
 
   @ManyToOne(type => Users, users => users.clients)
   user: Users
+
+  @OneToMany(type => Appointments, appointments => appointments.client)
+  appointments: Appointments[]
 }

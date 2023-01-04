@@ -1,24 +1,27 @@
-import { IsDecimal, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
+import { Transform } from "class-transformer"
+import { IsDecimal, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString } from "class-validator"
 
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
   name: string
 
-  @IsNumber({ maxDecimalPlaces: 2, allowNaN: false, allowInfinity: false })
-  @IsDecimal({ decimal_digits: '2,2' })
   @IsOptional()
+  @IsDecimal({ decimal_digits: "2,2" })
   price: number
 
-  @IsString()
   @IsOptional()
+  @IsString()
   note: string
 
-  @IsNumber()
   @IsOptional()
+  @Transform(({ value }) => parseInt(value))
+  @IsNumber()
+  @IsInt()
+  @IsPositive()
   duration: number
 
-  @IsString()
   @IsOptional()
+  @IsString()
   type: string
 }
