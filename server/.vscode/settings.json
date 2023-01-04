@@ -1,0 +1,9 @@
+{
+    "AutoPreview.serverURL": "localhost:3000",
+    "editor.indentSize": "tabSize",
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.unusualLineTerminators": "auto",
+    "prettier.bracketSpacing": false
+
+}
